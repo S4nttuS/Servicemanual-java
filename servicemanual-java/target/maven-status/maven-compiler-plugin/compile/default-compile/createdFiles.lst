@@ -1,0 +1,6 @@
+com\etteplanmore\servicemanual\factorydevice\FactoryDeviceRepository.class
+com\etteplanmore\servicemanual\factorydevice\FactoryDevice.class
+com\etteplanmore\servicemanual\factorydevice\FactoryDeviceController.class
+com\etteplanmore\servicemanual\factorydevice\FactoryDeviceNotFoundException.class
+com\etteplanmore\servicemanual\factorydevice\FactoryDeviceNotFoundAdvice.class
+com\etteplanmore\servicemanual\ServiceManualApplication.class
