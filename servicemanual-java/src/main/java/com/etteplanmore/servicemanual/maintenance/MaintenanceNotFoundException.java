@@ -1,4 +1,4 @@
-package com.etteplanmore.servicemanual.factorydevice;
+package com.etteplanmore.servicemanual.maintenance;
 
 class MaintenanceNotFoundException extends RuntimeException {
     

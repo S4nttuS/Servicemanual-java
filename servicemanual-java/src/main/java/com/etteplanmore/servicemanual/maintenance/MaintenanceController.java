@@ -1,8 +1,10 @@
-package com.etteplanmore.servicemanual.factorydevice;
+package com.etteplanmore.servicemanual.maintenance;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import com.etteplanmore.servicemanual.factorydevice.FactoryDeviceController;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class MaintenanceController {
+
     private final FactoryDeviceController factoryDeviceController;
+
     private final MaintenanceRepository repository;
 
     MaintenanceController(MaintenanceRepository repository, FactoryDeviceController factoryDeviceController) {
         this.repository = repository;
         this.factoryDeviceController = factoryDeviceController;
     }
-
 
     @GetMapping("/maintenances")
     List<Maintenance> all() {

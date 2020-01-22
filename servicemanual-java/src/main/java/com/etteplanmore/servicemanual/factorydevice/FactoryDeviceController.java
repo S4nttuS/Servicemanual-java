@@ -22,6 +22,7 @@ public class FactoryDeviceController {
     }
 
     @GetMapping("/factorydevices/{id}")
+	public
     FactoryDevice one(@PathVariable Long id) {
         return repository.findById(id)
             .orElseThrow(() -> new FactoryDeviceNotFoundException(id));
