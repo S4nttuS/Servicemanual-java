@@ -2,6 +2,10 @@ package com.etteplanmore.servicemanual.maintenance;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import java.util.List;
 
 import com.etteplanmore.servicemanual.factorydevice.FactoryDeviceController;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@EnableSwagger2
+@ApiModel(description="Controller for maintenance job endpoints")
 @RestController
 public class MaintenanceController {
 
@@ -25,11 +31,13 @@ public class MaintenanceController {
         this.factoryDeviceController = factoryDeviceController;
     }
 
+    @ApiOperation(value = "Find all maintenance jobs")
     @GetMapping("/maintenances")
     List<Maintenance> all() {
         return repository.findAllByOrderByCriticalityDescEntryDateDesc();
     }
-
+    
+    @ApiOperation(value = "Find all maintenance jobs for a device")
     @GetMapping("/maintenances/findbydevice/{deviceId}")
     List<Maintenance> findByDevice(@PathVariable Long deviceId) {
         if(factoryDeviceController.one(deviceId) != null)
@@ -37,12 +45,14 @@ public class MaintenanceController {
         return null;
     }
 
+    @ApiOperation(value = "Find maintenance job by id")
     @GetMapping("/maintenances/{id}")
     Maintenance one(@PathVariable Long id) {
         return repository.findById(id)
             .orElseThrow(() -> new MaintenanceNotFoundException(id));
     }
     
+    @ApiOperation(value = "Add a maintenance job")
     @PostMapping("/maintenances/add")
     Maintenance add(@RequestBody Maintenance maintenance){
         if(factoryDeviceController.one(maintenance.getDeviceId()) != null)
@@ -50,6 +60,7 @@ public class MaintenanceController {
         return null;
     }
 
+    @ApiOperation(value = "Edit maintenance job")
     @PutMapping("/maintenances/edit")
     Maintenance edit(@RequestBody Maintenance maintenance){
         Maintenance editable = one(maintenance.getId());
@@ -59,6 +70,7 @@ public class MaintenanceController {
         return null;
     }
 
+    @ApiOperation(value = "Delete a maintenance job")
     @DeleteMapping("/maintenances/delete/{id}")
     Maintenance delete(@PathVariable Long id){
         Maintenance deletable = one(id);
