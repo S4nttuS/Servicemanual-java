@@ -27,7 +27,14 @@ public class MaintenanceController {
 
     @GetMapping("/maintenances")
     List<Maintenance> all() {
-        return repository.findAll();
+        return repository.findAllByOrderByCriticalityDescEntryDateDesc();
+    }
+
+    @GetMapping("/maintenances/findbydevice/{deviceId}")
+    List<Maintenance> findByDevice(@PathVariable Long deviceId) {
+        if(factoryDeviceController.one(deviceId) != null)
+            return repository.findByDeviceIdOrderByCriticalityDescEntryDateDesc(deviceId);
+        return null;
     }
 
     @GetMapping("/maintenances/{id}")

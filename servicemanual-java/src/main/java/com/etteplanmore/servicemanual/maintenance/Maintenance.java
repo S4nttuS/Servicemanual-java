@@ -16,6 +16,7 @@ public class Maintenance {
     private Long deviceId;
     private Date entryDate;
     private String description;
+    private int criticality;
     private int status;
 
     protected Maintenance() {}
@@ -26,12 +27,14 @@ public class Maintenance {
      * @param deviceId Id of the factory device
      * @param entryDate Date for the maintenance entry
      * @param description Description for the maintenance job
+     * @param criticality Criticality of the maintenance job (2 = critical, 1 = important, 0 = minor)
      * @param status Status of the maintenance job (0-1)
      */
-    public Maintenance(Long deviceId, Date entryDate, String description, int status) {
+    public Maintenance(Long deviceId, Date entryDate, String description, int criticality, int status) {
         this.deviceId = deviceId;
         this.entryDate = entryDate;
         this.description = description;
+        this.criticality = criticality;
         this.status = status;
     }
 
@@ -49,6 +52,11 @@ public class Maintenance {
 
     public String getDescription() {
         return this.description;
+    }
+
+    // Assumes that user inserts correct values (0-2)
+    public int getCriticality() {
+        return this.criticality;
     }
 
     public int getStatus() {
