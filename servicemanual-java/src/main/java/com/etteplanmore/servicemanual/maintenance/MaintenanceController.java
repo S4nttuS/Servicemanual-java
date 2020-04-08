@@ -1,5 +1,5 @@
 package com.etteplanmore.servicemanual.maintenance;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiModel;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @EnableSwagger2
 @ApiModel(description="Controller for maintenance job endpoints")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class MaintenanceController {
 
