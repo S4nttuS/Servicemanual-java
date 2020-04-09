@@ -1,4 +1,4 @@
-# Servicemanual-java
+# servicemanual-java
 Pretask given by Etteplan MORE
 
 This application is for keeping records of maintenance jobs for factory devices.
