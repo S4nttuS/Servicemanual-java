@@ -5,11 +5,19 @@ This application is for keeping records of maintenance jobs for factory devices.
 
 Application supports finding all or a specific factory device(s), adding, editing and deleting factory devices and maintenance jobs for devices as well as finding all or a specific maintenance job(s) which are sorted first by criticality and then by entry date.
 
-**Project was made with:** Maven, Spring Boot & MySql database
 
 ## How to run this application
 
-**Application starts with the command:** mvn spring-boot:run
+First create schema to MySQL called servicemanual and change username and password in resources/application.properties to right values. Then
+```
+mvn spring-boot:run
+```
+
+## Built with
+* Maven
+* Spring Boot
+* MySql database
+
 
 ## Tools for testing
 
