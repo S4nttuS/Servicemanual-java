@@ -10,4 +10,5 @@ public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> 
     List<Maintenance> findAllByOrderByCriticalityDescEntryDateDesc();
     List<Maintenance> findByDeviceIdOrderByCriticalityDescEntryDateDesc(Long deviceId);
     Page<Maintenance> findAllByOrderByCriticalityDescEntryDateDesc(Pageable pageable);
+    Page<Maintenance> findByDeviceIdOrderByCriticalityDescEntryDateDesc(Long deviceId, Pageable pageable);
 }

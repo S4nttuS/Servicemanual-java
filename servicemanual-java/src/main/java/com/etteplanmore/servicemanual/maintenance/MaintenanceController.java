@@ -89,7 +89,8 @@ public class MaintenanceController {
     @ApiOperation(value = "Paginated get all for maintenances")
     @GetMapping("/maintenances/paginated")
     Page<Maintenance> all(@RequestParam(name = "page", required = false) Integer page,
-        @RequestParam(name = "items", required = false) Integer numberOfItems) {
+        @RequestParam(name = "items", required = false) Integer numberOfItems,
+        @RequestParam(name = "deviceId", required = false) Long deviceId) {
         Pageable maintenancesWithPages;
         if (page >= 0 && numberOfItems >= 0){
             maintenancesWithPages = PageRequest.of(page, numberOfItems);
@@ -97,7 +98,13 @@ public class MaintenanceController {
         else {
             maintenancesWithPages = PageRequest.of(0, Integer.MAX_VALUE);
         }
-        Page<Maintenance> pageMaintenance = repository.findAllByOrderByCriticalityDescEntryDateDesc(maintenancesWithPages);
+        Page<Maintenance> pageMaintenance;        
+        if (deviceId != 0) {
+            pageMaintenance = repository.findByDeviceIdOrderByCriticalityDescEntryDateDesc(deviceId, maintenancesWithPages);
+        }
+        else{
+            pageMaintenance = repository.findAllByOrderByCriticalityDescEntryDateDesc(maintenancesWithPages);
+        }
         return pageMaintenance;
     }
 
