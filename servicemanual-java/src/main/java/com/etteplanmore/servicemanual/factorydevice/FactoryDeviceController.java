@@ -5,13 +5,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import com.opencsv.CSVReader;
+
+import java.io.FileReader;
+
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -69,4 +77,29 @@ public class FactoryDeviceController {
         return deletable;
     }
 
+    @PostConstruct
+    public void loadFromCSV() {
+        /* File name of the CSV file. */
+        String fileName = "seeddata.csv";
+        
+        try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
+            String [] nextLine = reader.readNext();
+            
+            while ((nextLine = reader.readNext()) != null) {
+            FactoryDevice device = new FactoryDevice();
+            
+            device.setName(nextLine[0]);
+            device.setYear(Integer.parseInt(nextLine[1]));
+            device.setType(nextLine[2]);
+            
+            repository.save(device);
+            }
+        }
+        catch (FileNotFoundException f) {
+        }
+        catch (IOException i) {
+        }
+        catch (NumberFormatException n) {
+        }
+    }
 }
