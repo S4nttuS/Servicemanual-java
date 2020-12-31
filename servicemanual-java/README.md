@@ -6,8 +6,9 @@ This application is for keeping records of maintenance jobs for factory devices.
 Application supports finding all or a specific factory device(s), adding, editing and deleting factory devices and maintenance jobs for devices as well as finding all or a specific maintenance job(s) which are sorted first by criticality and then by entry date.
 
 **Added in December 2020:**
+- Operation for loading data to FactoryDevice table from seeddata.csv on startup
+- Pageable endpoints for both factory devices and maintenances
 
-Pageable endpoint
 
 ## How to run this application
 
@@ -23,8 +24,6 @@ mvn spring-boot:run
 
 
 ## Tools for testing
-
-Database can be filled with seeddata.csv
 
 **Postman:** https://www.getpostman.com/collections/3c42b822070ab924fe92
 
